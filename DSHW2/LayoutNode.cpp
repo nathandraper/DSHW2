@@ -13,10 +13,11 @@ LayoutNode::LayoutNode(Room* room) {
 
 void LayoutNode::addRoom(Room* room) {
 	LayoutNode* curr = this->next;
-	while (curr->getNext()) {
+	while (curr) {
 		curr = curr->getNext();
 	}
-	curr->setNext(new LayoutNode(room));
+	curr = new LayoutNode(room);
+	curr->setNext(nullptr);
 }
 
 // room numbers are zero based
