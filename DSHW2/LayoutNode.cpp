@@ -9,12 +9,12 @@ LayoutNode::LayoutNode() {
 
 LayoutNode::LayoutNode(Room* room) {
 	this->room = room;
+	this->next = nullptr;
 }
 
 void LayoutNode::addRoom(Room* room) {
 	LayoutNode* curr = this;
 	LayoutNode* newNode = new LayoutNode(room);
-	newNode->setNext(nullptr);
 
 	while (curr->getNext()) {
 		curr = curr->getNext();
@@ -25,10 +25,10 @@ void LayoutNode::addRoom(Room* room) {
 
 // room numbers are zero based
 void LayoutNode::deleteRoom(unsigned number) {
-	LayoutNode* curr = this->next;
-	LayoutNode* prev = nullptr;
+	LayoutNode* curr = this;
+	LayoutNode* prev = this;
 	while (number >= 0) {
-		if (!curr || !curr->getNext()) {
+		if (!curr->getNext()) {
 			throw NoSuchRoom();
 		}
 		prev = curr;
