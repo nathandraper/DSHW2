@@ -12,12 +12,15 @@ LayoutNode::LayoutNode(Room* room) {
 }
 
 void LayoutNode::addRoom(Room* room) {
-	LayoutNode* curr = this->next;
-	while (curr) {
+	LayoutNode* curr = this;
+	LayoutNode* newNode = new LayoutNode(room);
+	newNode->setNext(nullptr);
+
+	while (curr->getNext()) {
 		curr = curr->getNext();
 	}
-	curr = new LayoutNode(room);
-	curr->setNext(nullptr);
+	curr->setNext(newNode);
+
 }
 
 // room numbers are zero based
